@@ -1,0 +1,161 @@
+@use '../mixin' as m;
+
+.home-visual {
+  position: relative;
+  height: min(70vh, 450px);
+  background: var(--navy);
+  overflow: hidden;
+  margin-bottom: 5vh;
+  cursor: grab;
+
+  &:active {
+    //마우스로 누르고 있을 때
+    cursor: grabbing;
+  }
+
+  @include m.box-shadow;
+
+  &::before {
+    content: '';
+    pointer-events: none;
+    @include m.pos-center;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border: 1px solid rgba(#FFF, .5);
+    z-index: 11;
+  }
+
+  div.swiper-wrapper {
+    height: 100%;
+
+    figure.swiper-slide {
+      position: relative;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+
+      &.swiper-slide-active img {
+        transform: scale(1);
+      }
+
+      &:hover img {
+        filter: brightness(80%);
+      }
+
+      //img
+      img {
+        @include m.cover;
+        background: green;
+        filter: brightness(60%);
+        transform: scale(1.1);
+        transition: transform 10s linear, filter 1s;
+      }
+
+      //img
+      figcaption {
+        position: absolute;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+
+        small {
+          font-weight: 600;
+          font-size: 1.2em;
+        }
+
+        //small
+        h6 {
+          margin-top: 5px;
+          font-size: min(8vw, 5em);
+          /* font-size는 min 사용 권장, why? 작은 화면에서도 크기 고려 */
+          //vw 이해 필요
+          white-space: nowrap; //줄바꿈을 안함, 쓰는 이유 : 화면이 줄어들때 글씨가 다음 줄로 내려감
+          line-height: 1.3em;
+          font-weight: 600;
+
+          @media #{m.$max-xlg} {
+            @include m.ellipsis;
+          }
+        }
+
+        //h6
+        p {
+          margin: 20px 0;
+          max-width: 500px;
+        }
+
+        //p
+        button {
+          i {
+            margin-right: 10px;
+          }
+
+          &.play-btn {
+            margin-right: 5px;
+            @include m.button(#FFF, #FFF, rgba(#FFF, .3), #000, #FFF, rgba(#FFF, .8))
+          }
+
+          //button.play-btn
+          &.detail-btn {
+            @include m.button(#FFF, #FFF, rgba(#000, .3), #000, #000, rgba(#FFF, .8))
+          }
+
+          //button.detail-btn
+        }
+
+        //button
+      }
+
+      //figcaption
+    }
+
+    //figure.swiper-slide
+  }
+
+  //div.swiper-wrapper
+
+
+  .wheel-btn {
+    position: absolute;
+    z-index: 12;
+    left: calc(50% - 20px);
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 1px solid rgba(#FFF, .5);
+    background: rgba(#FFF, .3);
+
+    &::before {
+      content: '';
+      @include m.pos-center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(#FFF, .5);
+      border-radius: 50%;
+    }
+
+    //before
+    i {
+      color: rgba(#FFF, .5);
+      animation: jump .7s infinite alternate;
+    }
+  }
+
+  //wheel-btn
+
+  @keyframes jump {
+    0% {
+      transform: translateY(-3px);
+    }
+
+    100% {
+      transform: translateY(3px);
+    }
+  }
+
+}
+
+//home-visual

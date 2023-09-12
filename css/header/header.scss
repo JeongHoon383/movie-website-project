@@ -1,0 +1,148 @@
+@use '../mixin' as m;
+
+header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--navy);
+  background-image: url(../../img/check-pattern.png);
+  background-size: 20px;
+  @include m.box-shadow;
+  animation: bgmove 100s infinite linear;
+
+  @media #{m.$min-lg} {
+    height: 80px;
+  }
+
+  //min-lg
+  @media #{m.$max-lg} {
+    height: 60px;
+  }
+
+  //max-lg
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    margin: 0 auto;
+    height: inherit;
+
+    h1 {
+      height: 50%;
+
+      a {
+        display: flex; //css에선 inline 블록은 부모 취급을 안함
+        height: 100%;
+
+        img {
+          height: 100%;
+          margin-right: 10px;
+          transition: all .5s;
+        }
+
+        //img
+      }
+
+      //a
+      &:hover {
+        img:first-of-type {
+          transform: rotateY(360deg);
+        }
+
+        //img:first-child
+        img:last-of-type {
+          transform: rotateX(360deg);
+        }
+      }
+    }
+
+    //h1
+
+    .gnb {
+      position: relative;
+      div.menu-list {
+        position: absolute;
+        top: 0;
+        right: 120%;
+        display: inline-block;
+        button.toggle-btn {
+          &:active { //누르고 있는 동안
+            color: var(--green);
+          }//hover
+        }//button.toggle-btn
+        ul{
+          display: none;
+          position: absolute;
+          padding: 20px;
+          border-radius: 5px;
+          top: 30px;
+          left: 50%;
+          transform: translate(-50%);
+          background: #000;
+          &.active{
+            display: block;
+          }
+          li{
+            margin: 7px 0;
+            white-space: nowrap;
+            a:hover{
+              color: var(--green);
+              text-decoration: underline;
+            }
+          }
+        }
+      }//div.menu-list
+
+      a.goto-search {
+        font-weight: 600;
+        transition: all .5s;
+
+        &:hover {
+          color: var(--green);
+        }
+
+        //img
+      }
+
+      //a
+    }
+
+    //gnb
+  }
+
+  //center
+}
+
+//header
+
+.top-btn {
+  position: fixed;
+  z-index: 90;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background: var(--sky);
+  transition: all .5s;
+  opacity: 0;
+  pointer-events: none;
+
+  @media (hover:hover) {
+    &:hover {
+      background: var(--green);
+    }
+  }
+
+  //media
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  //active
+}
+
+//top-btn
